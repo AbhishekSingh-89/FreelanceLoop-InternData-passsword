@@ -1,23 +1,27 @@
-#!/usr/bin/env python3
+import hashlib
 
-import base64
+EXPECTED_HASH = "e0c6830bae960a200289e1109ab2fae46b72ce2bb985dc965eb8907721ccf734"
 
-_payload = (
-    "aW1wb3J0IGhhc2hsaWIKCkVYUEVDVEVEX0hBU0ggPSAiZTBjNjgzMGJhZTk2MGEyMDAyODll"
-    "MTEwOWFiMmZhZTQ2YjcyY2UyYmI5ODVkYzk2NWViODkwNzcyMWNjZjczNCIKUEFTVEVCSU5f"
-    "UEFTU1dPUkQgPSAiQ2hlY2tJbkRAcmsyV2ViIgoKCmRlZiB2ZXJpZnlfZmxhZyh1c2VyX2lu"
-    "cHV0KToKICAgIHJldHVybiBoYXNobGliLnNoYTI1Nih1c2VyX2lucHV0LmVuY29kZSgpKS5o"
-    "ZXhkaWdlc3QoKSA9PSBFWFBFQ1RFRF9IQVNIIAoKCmRlZiBtYWluKCk6CiAgICBwcmludCgi"
-    "RnJlZWxhbmNlIExvb3Ag4oCTIEludGVybmFsIFZlcmlmaWNhdGlvbiBUb29sIikKICAgIHBy"
-    "aW50KCI9PT09PT09PT09PT09PT09PT09PT09PT09PT09XG4iKQogICAgdXNlcl9mbGFnID0g"
-    "aW5wdXQoIkVudGVyIHZlcmlmaWNhdGlvbiBmbGFnOiAiKS5zdHJpcCgpCgogICAgaWYgdmVy"
-    "aWZ5X2ZsYWcodXNlcl9mbGFnKToKICAgICAgICBwcmludCgiXG5b4pyUXSBWZXJpZmljYXRp"
-    "b24gc3VjY2Vzc2Z1bC4iKQogICAgICAgIHByaW50KCJb4oCUIF0gUmVzdHJpY3RlZCByZWZl"
-    "cmVuY2UgcGFzc3dvcmQ6IikKICAgICAgICBwcmludChQQVNURUJJTl9QQVNTV09SRCkKICAg"
-    "ICAgICBwcmludCgiXG5Vc2UgdGhpcyBwYXNzd29yZCB0byB1bmxvY2sgdGhlIHByb3RlY3Rl"
-    "ZCByZXNvdXJjZS4iKQogICAgZWxzZToKICAgICAgICBwcmludCgiXG5b4pyYXSAgVmVyaWZp"
-    "Y2F0aW9uIGZhaWxlZC4iKQogICAgICAgIHByaW50KCJJbnZhbGlkIHJlZmVyZW5jZSBmbGFn"
-    "LiIpCgoKaWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjoKICAgIG1haW4oKQ=="
-)
+PASTEBIN_URL = "https://pastebin.com/wRwnHEwj"
+PASTEBIN_PASSWORD = "CheckInD@rkWeb"
 
-exec(compile(base64.b64decode(_payload), "<internal>", "exec"))
+def verify_flag(user_input):
+    return hashlib.sha256(user_input.encode()).hexdigest() == EXPECTED_HASH
+
+def main():
+    print("Freelance Loop - Internal Verification Tool")
+    print("===========================\n")
+
+    user_flag = input("Enter verification flag: ").strip()
+
+    if verify_flag(user_flag):
+        print("\n[+] Verification successful.")
+        print("Pastebin URL:")
+        print(PASTEBIN_URL)
+        print("\nPastebin Password:")
+        print(PASTEBIN_PASSWORD)
+    else:
+        print("\n[-] Invalid flag.")
+
+if __name__ == "__main__":
+    main()
