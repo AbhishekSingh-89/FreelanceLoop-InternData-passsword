@@ -1,0 +1,7 @@
+{
+  "batch": "FL-INT-17",
+  "status": "verified",
+  "note": "Use only clean structure files.",
+  "validation": "internal tool required before sharing raw text",
+  "flag": "INT{find_the_plain_text_dump}"
+}
